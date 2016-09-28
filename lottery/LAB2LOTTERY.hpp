@@ -13,6 +13,7 @@
 	int customerID;
 	int numOfTickets;
 	int *lotterynums;
+
 	};
 
 	struct Store{
@@ -21,6 +22,7 @@
 	int *customerList;
 	int numOfSold;
 	int numOfWinners[3]; // number of winners who match 1, 2 or 3 numbers
+
 	};
 
 	struct Owner{
@@ -28,6 +30,7 @@
 	int numOfStores;
 	int totalSold;
 	int totalWinners[3];
+
 	};
 
 
