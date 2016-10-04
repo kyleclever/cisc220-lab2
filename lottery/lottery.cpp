@@ -33,11 +33,10 @@ Store makeStore(){
 	Store temp;
 	temp.storeID = rand() % 100 + 1; // 1-100
 	temp.numOfCustomers = rand() % 10 +1; //1-10
+
 	Customer *customerList;
 	customerList = new Customer[temp.numOfCustomers];
 	temp.numOfSold = 0;
-
-	temp.customerList=customerList;
 
 	for(int i = 0; i < 	temp.numOfCustomers ;i++){
 		temp.customerList[i] = makeCustomer().numOfTickets;
@@ -50,12 +49,11 @@ Store makeStore(){
 Owner *makeOwner(){
 	Owner *temp;
 
-	temp->numOfStores =  rand()%10 + 1; // random num 1-10(including 10)
-	Store *Stores;
-	Stores=new Store[temp->numOfStores];
-	temp->totalSold = 0;
+	NumOfStores =  rand()%10 + 1; // random num 1-10(including 10)
 
-	temp->stores=Stores;
+
+	Store *Stores = new Store[NumOfStores];
+	temp->totalSold = 0;
 
 	for (int i = 0 ; i < temp->numOfStores; i++){
 		temp->stores[i] = makeStore().numOfCustomers;
