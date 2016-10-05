@@ -11,17 +11,17 @@ using namespace std;
 int checkwin(int *nums, int *winners);
 
 Customer makeCustomer(){
-	Customer temp;
+	Customer temp; // customer object
 	int customerID = rand()%1000+1;
 	int num_tickets = rand()%20+0;
 	temp.numOfTickets = num_tickets;
 
-	temp.lotterynums = new int *[temp.numOfTickets];
+	temp.lotterynums = new int *[temp.numOfTickets];  // 2d array
 
 	for(int i =0; i<temp.numOfTickets; i++){
 		temp.lotterynums[i]= new int[3];
 	               }// for
-
+	// intial three nums
 	int a = 0;
 	int b = 0;
 	int c = 0;
@@ -56,7 +56,7 @@ Store makeStore(){
 	int numOfSold = 0;
 
 	for(int i = 0; i < 	numOfCustomers ;i++){
-		customerlist[i] = makeCustomer();
+		customerlist[i] = makeCustomer();			// call makeCustomer to create customer
 		numOfSold += makeCustomer().numOfTickets;
 	}
 	//for
@@ -76,7 +76,7 @@ Owner *makeOwner(){
 
 
 	for (int i = 0 ; i < NumStores; i++){
-		stores[i]=makeStore();
+		stores[i]=makeStore();			// call makeStore to create store
 		totalsold += makeStore().numOfSold;
 	}// for
 
@@ -88,7 +88,7 @@ Owner *makeOwner(){
 }
 
 void getWinners (int winners[]){
-	int n1 = rand() % 10;
+	int n1 = rand() % 10;    	// generate random nums
 	int n2 = rand() % 10;
 	int n3 = rand() % 10;
 	winners[0] = n1;
@@ -97,6 +97,7 @@ void getWinners (int winners[]){
 }
 
 int checkwin(int *nums, int *winners){
+	// check is any number match with winners, return the number of match
 	int countwinnum=0;
 	for(int i=0; i<3;i++){
 		for(int j=0; j<3;j++){
@@ -109,6 +110,8 @@ int checkwin(int *nums, int *winners){
 
 }
 void findWinners(Owner *owner, int *ls){
+
+	// print out info
 	cout << "Total lottery tickets sold: "<<owner->totalSold<<endl;
 
 	cout << "Winning numbers: ";
@@ -133,10 +136,8 @@ void findWinners(Owner *owner, int *ls){
 			cout <<"\tcustomer: "<< owner->stores[i].customerList[j].customerID << endl;
 
 			for (int k = 0; k < owner->stores[i].customerList[j].numOfTickets; k++){
-
-				//int p = owner->stores[i].customerList[j].lotterynums[k][0];
+				// check if any numbers match
 				int matched = checkwin(owner->stores[i].customerList[j].lotterynums[k], ls);
-
 
 				if(matched ==1){
 					 cout<<"\t\tticket: ";
@@ -185,7 +186,5 @@ void findWinners(Owner *owner, int *ls){
 		}// for -stores
 
 		cout << "" << endl;
-//		cout<<"total 1 number win: "<<owner->totalWinners[0]<<endl;
-//		cout<<"total 2 number win: "<<owner->totalWinners[1]<<endl;
-//		cout<<"total 3 number win: "<<owner->totalWinners[2]<<endl;
+
 } //findWinners
