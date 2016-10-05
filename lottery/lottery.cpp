@@ -16,10 +16,10 @@ Customer makeCustomer(){
 	int num_tickets = rand()%20+0;
 	temp.numOfTickets = num_tickets;
 
-	int **lotteryNums = new int *[temp.numOfTickets];
+	temp.lotterynums = new int *[temp.numOfTickets];
 
 	for(int i =0; i<temp.numOfTickets; i++){
-		lotteryNums[i]= new int[3];
+		temp.lotterynums[i]= new int[3];
 	               }// for
 
 	int a = 0;
@@ -34,13 +34,13 @@ Customer makeCustomer(){
 
     	} while ( a==  b || a==c || b==c); // r1, r2, r3, must be different
 
-        lotteryNums[j][0]=a;
-        lotteryNums[j][1]=b;
-        lotteryNums[j][2]=c;
+    	temp.lotterynums[j][0]=a;
+    	temp.lotterynums[j][1]=b;
+    	temp.lotterynums[j][2]=c;
     }
 
     temp.customerID=customerID;
-    temp.lotterynums=*lotteryNums;
+    //temp.lotterynums=*lotteryNums;
 
 	return temp;
 }
@@ -134,15 +134,15 @@ void findWinners(Owner *owner, int *ls){
 
 			for (int k = 0; k < owner->stores[i].customerList[j].numOfTickets; k++){
 
-				int *p = owner->stores[i].customerList[j].lotterynums;
-				int matched = checkwin(&p[k], ls);
+				//int p = owner->stores[i].customerList[j].lotterynums[k][0];
+				int matched = checkwin(owner->stores[i].customerList[j].lotterynums[k], ls);
 
 
 				if(matched ==1){
 					 cout<<"\t\tticket: ";
 					 //int *b= &p[k];
 				     for (int l =0;l<3;l++){
-				    	 //cout<< p[l];
+				    	 cout<< owner->stores[i].customerList[j].lotterynums[k][l];
 				    	 //cout << b[l];
 				    }//for
 				     cout<<" matched "<<matched<<endl;
@@ -153,7 +153,7 @@ void findWinners(Owner *owner, int *ls){
 					 //int *b= &p[k];
 					 cout<<"\t\tticket: ";
 				     for (int m =0; m<3;m++){
-				    	 //cout<< owner->stores[i].customerList[j].lotterynums[m];
+				    	 cout<< owner->stores[i].customerList[j].lotterynums[k][m];
 				    	 //cout<< p[m];
 				    	// cout << b[m];
 				     }//for
@@ -166,7 +166,7 @@ void findWinners(Owner *owner, int *ls){
 					 cout<<"\t\tticket: ";
 				     for (int n =0;n<3;n++){
 				    	 //cout << p[n];
-				    	 //cout << b[n];
+				    	 cout<< owner->stores[i].customerList[j].lotterynums[k][n];
 				     }//for
 				     cout<<" matched "<<matched<<endl;
 				     owner->totalWinners[2]+=1;

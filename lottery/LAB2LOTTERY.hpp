@@ -12,7 +12,7 @@
 	struct Customer {
 	int customerID;
 	int numOfTickets;
-	int *lotterynums;
+	int **lotterynums;
 
 	};
 
