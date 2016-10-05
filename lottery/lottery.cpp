@@ -11,54 +11,72 @@ using namespace std;
 
 Customer makeCustomer(){
 	Customer temp;
-	temp.customerID = rand () % 1000 + 1; // random number between 1 and 1000
-	temp.numOfTickets = rand () % 20 + 1; // random ticket numbers from 1 - 20
-	int ticketArray[temp.numOfTickets][3];
+	int customerID = rand()%1000+1;
+	int numOfTickets = rand()%20+0;
+	temp.numOfTickets = numOfTickets;
+	int **lotteryNum = new int *[temp.numOfTickets];
 
-	for(int i = 0; i< temp.numOfTickets;i++){
-		do{
+	for(int i =0; i<temp.numOfTickets; i++){
+		lotteryNum[i]= new int[3];
+	               }// for
 
-		for(int k=0;k<3;k++){
-			int lotterynums = rand()% 9+0;
-			ticketArray[i][k]=lotterynums;}//for
-
-		}while
-			(ticketArray[i][0]==ticketArray[i][1] ||ticketArray[i][0]==ticketArray[i][2] \
-					||ticketArray[i][1]==ticketArray[i][2] ); //do while
-	}//for
-
+    for(int i =0; i<temp.numOfTickets;i++){
+    	int r1=rand()%9+0;
+        int r2=rand()%9+0;
+        int r3=rand()%9+0;
+        while (r2==r1 || r3==r2 || r3==r1){
+            r2=rand()%9+0;
+            r3=rand()%9+0;	// r1, r2, r3, must be different
+        }
+        lotteryNum[i][0]=r1;
+        lotteryNum[i][1]=r2;
+        lotteryNum[i][2]=r3;
+    }
+    temp.customerID=customerID;
+    temp.lotterynums=*lotteryNum;
 	return temp;
 }
+
 Store makeStore(){
 	Store temp;
-	temp.storeID = rand() % 100 + 1; // 1-100
-	temp.numOfCustomers = rand() % 10 +1; //1-10
 
-	Customer *customerList;
-	customerList = new Customer[temp.numOfCustomers];
-	temp.numOfSold = 0;
+	int storeID = rand() % 100 + 1; // 1-100
+	int numOfCustomers = rand() % 10 +1; //1-10
 
-	for(int i = 0; i < 	temp.numOfCustomers ;i++){
-		temp.customerList[i] = makeCustomer().numOfTickets;
-		temp.numOfSold += makeCustomer().numOfTickets;
+	//Customer *customerlist = new Customer[numOfCustomers];
+	int customerlist[numOfCustomers];
+
+	int numOfSold = 0;
+
+	for(int i = 0; i < 	numOfCustomers ;i++){
+		customerlist[i] = makeCustomer().numOfTickets;
+		numOfSold += makeCustomer().numOfTickets;
 	}
 	//for
+	temp.storeID= storeID;
+	temp.numOfSold = numOfSold;
+	temp.customerList = customerlist;
+	temp.numOfCustomers = numOfCustomers;
 	return temp;
 }// makeStore
 
 Owner *makeOwner(){
-	Owner *temp;
+	Owner *temp = new Owner();
+	int NumStores = rand() % 10 +1;
+	//Store *stores = new Store[NumStores]; // random num 1-10(including 10)
+	int totalsold = 0;
 
-	NumOfStores =  rand()%10 + 1; // random num 1-10(including 10)
+	int Stores[NumStores];
 
 
-	Store *Stores = new Store[NumOfStores];
-	temp->totalSold = 0;
-
-	for (int i = 0 ; i < temp->numOfStores; i++){
-		temp->stores[i] = makeStore().numOfCustomers;
-		temp->totalSold += makeStore().numOfSold;
+	for (int i = 0 ; i < NumStores; i++){
+		Stores[i] = makeStore().numOfSold;
+		totalsold += makeStore().numOfSold;
 	}// for
+
+	temp-> stores = Stores;
+	temp->totalSold=totalsold;
+	temp->numOfStores=NumStores;
 
 	return temp;
 }
@@ -86,6 +104,11 @@ int checkwin(int *nums, int *winners){
 }
 void findWinners(Owner *owner, int *ls){
 	cout << "Total lottery tickets sold: "<<owner->totalSold<<endl;
-	cout << "Winning numbers: "<< ls << endl;
-	cout << "\tStores: "<< owner->stores<<endl;
+
+	cout << "Winning numbers: ";
+	for (int j=0;  j<3; j++){
+		cout << ls[j];
+	}//
+	cout << endl;
+	cout << "\tStores: "<< owner->numOfStores<<endl;
 }
