@@ -19,14 +19,14 @@
 	struct Store{
 	int storeID;
 	int numOfCustomers;
-	int *customerList;
+	Customer *customerList;
 	int numOfSold;
 	int numOfWinners[3]; // number of winners who match 1, 2 or 3 numbers
 
 	};
 
 	struct Owner{
-	int *stores;
+	Store *stores;
 	int numOfStores;
 	int totalSold;
 	int totalWinners[3];
